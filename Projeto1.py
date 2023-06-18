@@ -6,6 +6,8 @@ import tensorflow as tf
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 
@@ -43,23 +45,23 @@ def evaluate_performance(y_test, y_pred):
     #Calcula as métricas do modelo a partir da matriz de confusão.
     cm = confusion_matrix(y_test, y_pred)
     
-    tp = cm[0,0]
-    tn = cm[1,1]
-    fn = cm[0,1]
-    fp = cm[1,0]
+    tp = cm[1,1]
+    tn = cm[0,0]
+    fn = cm[1,0]
+    fp = cm[0,1]
     p = tp + fn
     n = tn + fp
     accuracy = (tp + tn) / (p + n)  
     precision = tp / (tp + fp)      
     sensitivity = tp/p              
-    specificity = tn/(fp + tn)  
+    specificity = tn/n
     F1 = (2*tp)/(2*tp + fp + fn)
     return tp, tn, fp, fn, accuracy, precision,sensitivity,specificity, F1, cm
 
 
 if __name__ == '__main__':
     
-    name_path = r'C:\Users\amaur\OneDrive\Área de Trabalho\Eletrônica\Mestrado\Aulas\Conjunto de Dados Projeto 1\Dados'
+    name_path = r'C:\Users\amaur\OneDrive\Área de Trabalho\Eletrônica\Mestrado\Aulas\Conjunto de Dados Projeto 1\Dados 2'
     
     x, y, id_paciente = read_names(name_path)
     
@@ -102,7 +104,7 @@ if __name__ == '__main__':
     
     #Calcula as métricas do modelo
     tp, tn, fp, fn, accuracy, precision, sensitivity, specificity, F1, cm = evaluate_performance(y_test, y_pred)
-    #
+    
     
     print("sensitivity = %.2f%%" % (sensitivity*100))
     print("specificity = %.2f%%" % (specificity*100))
@@ -112,3 +114,15 @@ if __name__ == '__main__':
     
     print("Confusion Matrix: ")
     print(cm)
+    
+    
+    cm = confusion_matrix(y_test, y_pred)
+
+    class_labels = ['Classe 0', 'Classe 1']
+
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=class_labels, yticklabels=class_labels)
+    plt.title('Matriz de Confusão')
+    plt.xlabel('Classe Prevista')
+    plt.ylabel('Classe Real')
+    plt.show()
