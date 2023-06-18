@@ -54,7 +54,7 @@ def evaluate_performance(y_test, y_pred):
     sensitivity = tp/p              
     specificity = tn/(fp + tn)  
     F1 = (2*tp)/(2*tp + fp + fn)
-    return tp, tn, fp, fn, accuracy, precision,sensitivity,specificity, F1
+    return tp, tn, fp, fn, accuracy, precision,sensitivity,specificity, F1, cm
 
 
 if __name__ == '__main__':
@@ -101,7 +101,7 @@ if __name__ == '__main__':
     
     
     #Calcula as métricas do modelo
-    tp, tn, fp, fn, accuracy, precision, sensitivity, specificity, F1 = evaluate_performance(y_test, y_pred)
+    tp, tn, fp, fn, accuracy, precision, sensitivity, specificity, F1, cm = evaluate_performance(y_test, y_pred)
     #
     
     print("sensitivity = %.2f%%" % (sensitivity*100))
@@ -109,3 +109,6 @@ if __name__ == '__main__':
     print("accuracy = %.2f%%" % (accuracy*100))
     print("F1 = %.2f%%" % (F1*100))
     print("precision = %.2f%%" % (precision*100))
+    
+    print("Confusion Matrix: ")
+    print(cm)
