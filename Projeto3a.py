@@ -78,10 +78,11 @@ if __name__ == '__main__':
     
     
     
+    print("Sensibilidade = %.2f%%"% (sensitivity*100))
+    print("Acurácia = %.2f%%"% (accuracy*100))
+    print("F1-score = %.2f%%"% (F1*100))
+    print("Precisão = %.2f%%"% (precision*100))
     
-    print("Acurácia:", accuracy)
-    print("Precisão:", precision)
-    print("Sensibilidade:", sensitivity)
-    print("F1-score:", F1)
+    
     
     
