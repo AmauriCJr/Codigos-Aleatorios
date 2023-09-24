@@ -1,12 +1,5 @@
 import tensorflow as tf
 
-# Verifica se a GPU está disponível e configurada corretamente
-if tf.test.gpu_device_name():
-    print('GPU encontrada:')
-    print(tf.test.gpu_device_name())
-else:
-    print('GPU não encontrada. Certifique-se de que o CUDA está configurado corretamente.')
-
 # Carrega os dados MNIST
 (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
 
